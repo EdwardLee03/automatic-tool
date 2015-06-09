@@ -1,14 +1,14 @@
-# http://www.gnu.org/software/automake
+/bin/
 
-Makefile.in
 
-# http://www.gnu.org/software/autoconf
+# IDEA
+.idea/
+*.iml
 
-/autom4te.cache
-/aclocal.m4
-/compile
-/configure
-/depcomp
-/install-sh
-/missing
-/stamp-h1
+# Eclipse
+.settings/
+.classpath
+.project
+
+# Git
+.gitignore
