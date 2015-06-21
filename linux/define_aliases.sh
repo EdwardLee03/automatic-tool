@@ -24,4 +24,6 @@ echo 'alias ll=\'ls -lF --color=auto\'' >> "$bash_aliases"
 echo 'alias la=\'ls -alF --color=auto\'' >> "$bash_aliases"
 echo 'alias ls=\'ls -F\'' >> "$bash_aliases"
 
+echo '' >> "$bash_aliases"
+echo '# grep' >> "$bash_aliases"
 echo 'alias grep=\'grep --color=auto --exclude-dir=\.git\.svn\'' >> "$bash_aliases"
