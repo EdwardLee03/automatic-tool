@@ -18,7 +18,24 @@ if [ -z "$log_file" ] ; then
     exit;
 fi
 
-awk -F\" '{ print $4; }' "$log_file" | awk 'BEGIN { FS="="; sum=0; count=0; max=0; oneSec=0; tenMillis=0; print "\n\n------ api response time statistics ------"; } \
- { sum+=$2; count+=1; if ($2>max) max=$2; if ($2>1) oneSec+=1; if ($2>0.01) tenMillis+=1; } \
-END { avgTime=sum/count; print "Average Time: " avgTime ", Max: " max ", Sum: " sum ", Count: " count \
-", >1s: " oneSec ", >10ms: " tenMillis "\n"; }'
+awk -F\" '{ print $4; }' "$log_file" | awk 'BEGIN { FS="="; sum=0; count=0; max=0; \
+lessThan50MillisCounter=0; lessThan100MillisCounter=0; \
+lessThan200MillisCounter=0; lessThan300MillisCounter=0; \
+lessThan500MillisCounter=0; lessThan1SecCounter=0; moreThan1SecCounter=0; \
+print "\n\n------ api response time statistics ------"; } \
+{ sum+=$2; count+=1; if ($2>max) max=$2; \
+if ($2<0.05) { lessThan50MillisCounter+=1; } else if ($2<0.1) { lessThan100MillisCounter+=1; } \
+else if ($2<0.2) { lessThan200MillisCounter+=1; } else if ($2<0.3) { lessThan300MillisCounter+=1; } \
+else if ($2<0.5) { lessThan500MillisCounter+=1; } else if ($2<1) { lessThan1SecCounter+=1; } \
+else { moreThan1SecCounter+=1; } \
+} \
+END { avgTime=sum/count; \
+print "Average Time: " avgTime ", Sum: " sum ", Count: " count ", Max: " max "\n" \
+"<50ms: " lessThan50MillisCounter "\n" \
+"<100ms: " lessThan100MillisCounter "\n" \
+"<200ms: " lessThan200MillisCounter "\n" \
+"<300ms: " lessThan300MillisCounter "\n" \
+"<500ms: " lessThan500MillisCounter "\n" \
+"<1s: " lessThan1SecCounter "\n" \
+">1s: " moreThan1SecCounter "\n" \
+; }'
