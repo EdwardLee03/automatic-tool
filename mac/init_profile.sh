@@ -14,3 +14,7 @@ echo "# set PATH so it includes user's private bin if it exists" >> "$profile"
 echo 'if [ -d $HOME/bin ]; then' >> "$profile"
 echo '    PATH=$HOME/bin:$PATH' >> "$profile"
 echo 'fi' >> "$profile"
+
+echo '' >> "$profile"
+echo '# define CD base directory' >> "$profile"
+echo 'export CDPATH=.:~' >> "$profile"
