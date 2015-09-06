@@ -14,7 +14,7 @@ if [ -f "$profile" ]; then
     # load Bash Shell's setting
     echo "" >> "$profile"
     echo "# if running Bash" >> "$profile"
-    echo "[ -r $bashrc ] && . $bashrc" >> "$profile"
+    echo "[ -r ~/$bashrc ] && . ~/$bashrc" >> "$profile"
 fi
 
 echo "### Bash Settings" >> "$bashrc"

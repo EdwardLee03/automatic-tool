@@ -21,11 +21,12 @@ if [ -f "$bash_aliases" ]; then
     echo "" >> "$bash_aliases"
     echo "# grep" >> "$bash_aliases"
     echo "alias grep='grep --color=auto --exclude-dir=\.git\.svn'" >> "$bash_aliases"
+    echo "alias egrep='grep --color=auto --exclude-dir=\.git\.svn'" >> "$bash_aliases"
 fi
 
 if [ -f "$bashrc" ]; then
     # load Alias
     echo "" >> "$bashrc"
     echo "# if define Aliases" >> "$bashrc"
-    echo "[ -r $bash_aliases ] && . $bash_aliases" >> "$bashrc"
+    echo "[ -r ~/$bash_aliases ] && . ~/$bash_aliases" >> "$bashrc"
 fi

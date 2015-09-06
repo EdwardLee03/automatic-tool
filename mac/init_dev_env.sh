@@ -15,5 +15,5 @@ if [ -f "$bashrc" ]; then
     # set Develop Environment
     echo "" >> "$bashrc"
     echo "# if set Develop Environment" >> "$bashrc"
-    echo "[ -r $dev_env ] && . $dev_env" >> "$bashrc"
+    echo "[ -r ~/$dev_env ] && . ~/$dev_env" >> "$bashrc"
 fi

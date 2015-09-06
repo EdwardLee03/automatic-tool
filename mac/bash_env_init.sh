@@ -46,4 +46,4 @@ dev_env='.dev_env'
 sh "$script_dir"/init_dev_env.sh "$dev_env"
 
 # load User's Bash setting
-[ -r "$profile" ] && . "$profile"
+[ -r ~/"$profile" ] && . ~/"$profile"
