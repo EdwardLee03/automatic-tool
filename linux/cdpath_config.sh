@@ -46,3 +46,5 @@ echo "export CDPATH=$cd_path" >> "$profile"
 
 # reload User's Profile
 [ -r "$profile" ] && . "$profile"
+
+[ $? -eq 0 ] && echo "set CDPATH to '$cd_path'"
