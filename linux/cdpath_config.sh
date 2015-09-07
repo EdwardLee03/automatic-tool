@@ -35,7 +35,7 @@ while getopts ":p:h" opt; do
 done
 
 if [ -z "$cd_path" ]; then
-    echo "Failed: -p param must be not empty!";
+    echo -e "\033[31m Failed: -p param must be not empty! \033[0m";
     exit 3
 fi
 
