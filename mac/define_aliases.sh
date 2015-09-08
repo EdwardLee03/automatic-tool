@@ -14,7 +14,7 @@ sh "$script_dir"/create_empty_exe_file.sh "$bash_aliases"
 if [ -f "$bash_aliases" ]; then
     # Alias definitions
     echo "# ls" > "$bash_aliases"   # > : clear file's content
-    echo "alias ll='ls -alF'" >> "$bash_aliases"
+    echo "alias ll='ls -alhF'" >> "$bash_aliases"
     echo "alias la='ls -A'" >> "$bash_aliases"
     echo "alias l='ls -CF'" >> "$bash_aliases"
 
