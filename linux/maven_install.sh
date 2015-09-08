@@ -39,39 +39,37 @@ while getopts ":v:h" opt; do
 done
 
 if [ -z "$maven_version" ]; then
-    echo "Failed: -v param must be not empty!";
+    echo -e "\033[31m Failed: -v param must be not empty! \033[0m"
     exit 3
 fi
 
-# to Downloads
-cd ~/Downloads/
-
 # extract archive files
 maven_file=apache-maven-"$maven_version"
-maven_bin="$maven_file"-bin.tar
+maven_bin=~/Downloads/"$maven_file"-bin.tar
 if [ ! -e "$maven_bin" ]; then
     echo -e "\033[31m Failed: '$maven_bin' is not exist, please download first! \033[0m"
     exit 3
 fi
-tar -xzvf "$maven_bin"
 
 # move to User's App Root
 user_app=/usr/app/
-mv "$maven_file" "$user_app"
+tar -C "$user_app" -xzf "$maven_bin"
+cd "$user_app"
 
 # create Soft Link
-ln -s "$user_app""$maven_file" "$user_app"maven
+soft_link='maven'
+ln -s "$maven_file" "$soft_link"
 
-maven_dir="$user_app"maven
+maven_home="$user_app""$soft_link"
 
 dev_env="$HOME/.dev_env"
 echo '' >> "$dev_env"
 echo '# config Maven' >> "$dev_env"
-echo "export M2_HOME=$maven_dir" >> "$dev_env"
+echo "export M2_HOME=$maven_home" >> "$dev_env"
 echo 'export PATH=$M2_HOME/bin:$PATH' >> "$dev_env"
 
 # reload User's Profile
 profile="$HOME/.profile"
 [ -r "$profile" ] && . "$profile"
 
-[ $? -eq 0 ] && echo -e "\nset M2_HOME to '$maven_dir'"
+[ $? -eq 0 ] && echo -e "\033[32m set M2_HOME to '$maven_home' \033[0m"
