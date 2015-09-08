@@ -47,3 +47,5 @@ sh "$script_dir"/init_dev_env.sh "$dev_env"
 
 # load User's Bash setting
 [ -r ~/"$profile" ] && . ~/"$profile"
+
+[ $? -eq 0 ] && echo "\033[32m Initialize user's Bash environment for '~/$profile' successful \033[0m"

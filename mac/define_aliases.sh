@@ -30,3 +30,5 @@ if [ -f "$bashrc" ]; then
     echo "# if define Aliases" >> "$bashrc"
     echo "[ -r ~/$bash_aliases ] && . ~/$bash_aliases" >> "$bashrc"
 fi
+
+[ $? -eq 0 ] && echo "\033[32m Define Aliases for '~/$bash_aliases' completely \033[0m"

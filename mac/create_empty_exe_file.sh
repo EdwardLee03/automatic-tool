@@ -11,7 +11,7 @@
 file_name="$1"
 if [ ! -f "$file_name" ]; then
     echo "" > "$file_name"     # create an empty file
-    echo "Successful create '$file_name' file"
+    echo "Create '$file_name' file successful"
 
 #    chmod +x "$file_name"      # grant 'executable permission'
 fi

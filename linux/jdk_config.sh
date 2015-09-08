@@ -52,4 +52,4 @@ profile="$HOME/.profile"
 [ -r "$profile" ] && . "$profile"
 #[ -r ~/.profile ] && . ~/.profile
 
-[ $? -eq 0 ] && echo "set JAVA_HOME to '$java_home'"
+[ $? -eq 0 ] && echo "\033[32m Set JAVA_HOME to '$java_home' \033[0m"

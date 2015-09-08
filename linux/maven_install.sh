@@ -72,4 +72,4 @@ echo 'export PATH=$M2_HOME/bin:$PATH' >> "$dev_env"
 profile="$HOME/.profile"
 [ -r "$profile" ] && . "$profile"
 
-[ $? -eq 0 ] && echo -e "\033[32m set M2_HOME to '$maven_home' \033[0m"
+[ $? -eq 0 ] && echo -e "\033[32m Set M2_HOME to '$maven_home' \033[0m"

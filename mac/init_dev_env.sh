@@ -17,3 +17,5 @@ if [ -f "$bashrc" ]; then
     echo "# if set Develop Environment" >> "$bashrc"
     echo "[ -r ~/$dev_env ] && . ~/$dev_env" >> "$bashrc"
 fi
+
+[ $? -eq 0 ] && echo "\033[32m Initialize Bash Shell for '~/$dev_env' completely \033[0m"
