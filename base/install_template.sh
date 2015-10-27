@@ -10,7 +10,7 @@
 
 usage () {
     echo "Usage:"
-    echo "sh install_template.sh -d 'xxxxx' -c 'xxxxx' [-s '0']"
+    echo "sh install_template.sh -d 'xxxxx' [-c 'xxxxx' -s '0']"
     echo "  -d  download url"
     echo "  -c  configure option"
     echo "  -s  sudo permission (0|1)"
@@ -44,9 +44,6 @@ done
 if [ -z ${download_url} ]; then
     echo '-d option (download url) is empty'
     exit 2
-elif [ -z ${configure_option} ]; then
-    echo '-c option (configure option) is empty'
-    exit 2
 fi
 
 
@@ -70,7 +67,11 @@ ln -s ${file_name}/ ${symbolic_link}
 
 # 5. configure
 cd ${symbolic_link}
-./configure ${configure_option}
+if [ -z ${configure_option} ]; then
+    ./configure
+else
+    ./configure ${configure_option}
+fi
 
 # 6. build the source
 make -j2

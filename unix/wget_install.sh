@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # -----------------------------------------------
-# Install 'wget'.
+# Install 'Wget'.
 # (http://osxdaily.com/2012/05/22/install-wget-mac-os-x/)
 #
-# Download 'wget' - http://ftp.gnu.org/gnu/wget/
+# Download 'Wget' - http://ftp.gnu.org/gnu/wget/
 # http://www.gnu.org/software/wget/
 #
 # User: xingle
@@ -46,4 +46,4 @@ download_url="http://ftp.gnu.org/gnu/wget/wget-$version.tar.gz"
 configure_option='--with-ssl=openssl --with-libssl-prefix=/usr/local/ssl/lib'
 
 # install
-sh ../base/install_template.sh -d "$download_url" -c "$configure_option"
+sh ../base/install_template.sh -d "$download_url" -c "$configure_option" -s '1'
