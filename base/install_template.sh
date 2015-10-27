@@ -10,21 +10,26 @@
 
 usage () {
     echo "Usage:"
-    echo "sh install_template.sh -d 'xxxxx' [-c 'xxxxx' -s '0']"
+    echo "sh install_template.sh -d 'xxx' [-c 'xxx' -o 'xxx' -s '0']"
     echo "  -d  download url"
-    echo "  -c  configure option"
+    echo "  -c  command of configure"
+    echo "  -o  option of configure"
     echo "  -s  sudo permission (0|1)"
 }
 
 download_url=''
+configure_command='configure'
 configure_option=''
 sudo_permission='0'
-while getopts ":d:c:s:h" opt; do
+while getopts ":d:c:o:s:h" opt; do
     case "$opt" in
     d)
         download_url="$OPTARG"
         ;;
     c)
+        configure_command="$OPTARG"
+        ;;
+    o)
         configure_option="$OPTARG"
         ;;
     s)
@@ -68,9 +73,9 @@ ln -s ${file_name}/ ${symbolic_link}
 # 5. configure
 cd ${symbolic_link}
 if [ -z ${configure_option} ]; then
-    ./configure
+    ./${configure_command}
 else
-    ./configure ${configure_option}
+    ./${configure_command} ${configure_option}
 fi
 
 # 6. build the source

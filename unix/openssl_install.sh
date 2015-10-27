@@ -1,20 +1,18 @@
 #!/usr/bin/env bash
 
 # -----------------------------------------------
-# Install 'Wget'.
-# (http://osxdaily.com/2012/05/22/install-wget-mac-os-x/)
+# Install 'OpenSSL'.
 #
-# Download 'Wget' - http://ftp.gnu.org/gnu/wget/
-# http://www.gnu.org/software/wget/
+# Download 'OpenSSL' - https://www.openssl.org/source/
 #
 # User: xingle
 # Date: 15/10/27
-# Time: 17:55
+# Time: 23:30
 # -----------------------------------------------
 
 usage () {
     echo "Usage:"
-    echo "sh wget_install.sh -v '1.16.3'"
+    echo "sh openssl_install.sh -v '1.0.2d'"
     echo "  -v  the latest stable version"
 }
 
@@ -42,8 +40,7 @@ fi
 
 
 # the latest stable version
-download_url="http://ftp.gnu.org/gnu/wget/wget-$version.tar.gz"
-configure_option='--with-ssl=openssl --with-libssl-prefix=/usr/local/ssl/lib'
+download_url="https://www.openssl.org/source/openssl-$version.tar.gz"
 
 # install
-sh ../base/install_template.sh -d "$download_url" -o "$configure_option" -s '1'
+sh ../base/install_template.sh -d "$download_url" -c 'config' -s '1'
