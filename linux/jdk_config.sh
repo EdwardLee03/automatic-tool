@@ -35,7 +35,7 @@ while getopts ":v:h" opt; do
 done
 
 if [ -z "$jdk_version" ]; then
-    echo -e "\033[31m Failed: -v param must be not empty! \033[0m";
+    echo -e "\033[31m Failed: -v param must be not empty! \033[0m"
     exit 3
 fi
 
