@@ -10,20 +10,25 @@
 
 usage () {
     echo "Usage:"
-    echo "sh install_template.sh -d 'xxxxx' -c 'xxxxx'"
+    echo "sh install_template.sh -d 'xxxxx' -c 'xxxxx' [-s '0']"
     echo "  -d  download url"
     echo "  -c  configure option"
+    echo "  -s  sudo permission (0|1)"
 }
 
 download_url=''
 configure_option=''
-while getopts ":d:c:h" opt; do
+sudo_permission='0'
+while getopts ":d:c:s:h" opt; do
     case "$opt" in
     d)
         download_url="$OPTARG"
         ;;
     c)
         configure_option="$OPTARG"
+        ;;
+    s)
+        sudo_permission="$OPTARG"
         ;;
     h)
         usage
@@ -71,4 +76,8 @@ cd ${symbolic_link}
 make -j2
 
 # 7. install
-sudo make install
+if [ '0' -eq ${sudo_permission} ]; then
+    make install
+else
+    sudo make install
+fi
