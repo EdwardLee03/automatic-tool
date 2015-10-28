@@ -20,9 +20,9 @@ usage () {
 
 version=''
 while getopts ":v:h" opt; do
-    case "$opt" in
+    case ${opt} in
     v)
-        version="$OPTARG"
+        version=${OPTARG}
         ;;
     h)
         usage
@@ -46,4 +46,4 @@ download_url="http://ftp.gnu.org/gnu/wget/wget-$version.tar.gz"
 configure_option='--with-ssl=openssl --with-libssl-prefix=/usr/local/ssl/lib'
 
 # install
-sh ../base/install_template.sh -d "$download_url" -o "$configure_option" -s '1'
+sh ../base/install_template.sh -d ${download_url} -o ${configure_option} -s '1'

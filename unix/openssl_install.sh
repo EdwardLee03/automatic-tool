@@ -18,9 +18,9 @@ usage () {
 
 version=''
 while getopts ":v:h" opt; do
-    case "$opt" in
+    case ${opt} in
     v)
-        version="$OPTARG"
+        version=${OPTARG}
         ;;
     h)
         usage
@@ -43,4 +43,4 @@ fi
 download_url="https://www.openssl.org/source/openssl-$version.tar.gz"
 
 # install
-sh ../base/install_template.sh -d "$download_url" -c 'config' -s '1'
+sh ../base/install_template.sh -d ${download_url} -c 'config' -s '1'
