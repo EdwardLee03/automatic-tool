@@ -10,30 +10,40 @@
 
 usage () {
     echo "Usage:"
-    echo "sh install_template.sh -d 'xxx' [-c 'xxx' -o 'xxx' -s '0']"
+    echo "sh install_template.sh -d 'xxx' [-c 'xxx' -o 'xxx' -m 'xxx' -s '0' -t '0']"
     echo "  -d  download url"
     echo "  -c  command of configure"
     echo "  -o  option of configure"
-    echo "  -s  sudo permission (0|1)"
+    echo "  -m  option of make"
+    echo "  -s  sudo install (0|1)"
+    echo "  -t  make test (0|1)"
 }
 
 download_url=''
 configure_command='configure'
 configure_option=''
-sudo_permission='0'
-while getopts ":d:c:o:s:h" opt; do
-    case "$opt" in
+make_option=''
+is_sudo_install='0'
+is_make_test='0'
+while getopts ":d:c:o:m:s:t:h" opt; do
+    case ${opt} in
     d)
-        download_url="$OPTARG"
+        download_url=${OPTARG}
         ;;
     c)
-        configure_command="$OPTARG"
+        configure_command=${OPTARG}
         ;;
     o)
-        configure_option="$OPTARG"
+        configure_option=${OPTARG}
+        ;;
+    m)
+        make_option=${OPTARG}
         ;;
     s)
-        sudo_permission="$OPTARG"
+        is_sudo_install=${OPTARG}
+        ;;
+    t)
+        is_make_test=${OPTARG}
         ;;
     h)
         usage
@@ -53,6 +63,7 @@ fi
 
 
 # 1. download the source
+echo "\033[32m Downloading $download_url \033[0m"
 curl -O ${download_url}
 
 # 2. uncompress the files, then remove
@@ -79,10 +90,22 @@ else
 fi
 
 # 6. build the source
-make -j2
+echo "\033[32m Building the source \033[0m"
+if [ -z ${make_option} ]; then
+    make
+else
+    make ${make_option}
+fi
 
-# 7. install
-if [ '0' -eq ${sudo_permission} ]; then
+# 7. test
+if [ '1' -eq ${is_make_test} ]; then
+    echo "\033[32m Testing \033[0m"
+    make test
+fi
+
+# 8. install
+echo "\033[32m Installing \033[0m"
+if [ '0' -eq ${is_sudo_install} ]; then
     make install
 else
     sudo make install
