@@ -66,16 +66,17 @@ fi
 echo "\033[32m Downloading $download_url \033[0m"
 curl -O ${download_url}
 
-# 2. uncompress the files, then remove
-tar_package_name=${download_url##*/} # Longest Substring Match - http://blog.csdn.net/princess9/article/details/7621178
+# 2. extract the file, then remove
+# Longest Substring Match - http://blog.csdn.net/princess9/article/details/7621178
+tar_package_name=${download_url##*/}
 tar -xzf ${tar_package_name}
 rm -rf ${tar_package_name}
 
-# 3. move to `User App Root`
+# 3. move to `user local dir`
 file_name=${tar_package_name%%.[a-z]*}
-user_app_root='/usr/app/'
-mv ${file_name}/ ${user_app_root}
-cd ${user_app_root}
+user_local_dir='/usr/local/'
+mv ${file_name}/ ${user_local_dir}
+cd ${user_local_dir}
 
 # 4. create `symbolic link`
 symbolic_link=${file_name%%-*}
